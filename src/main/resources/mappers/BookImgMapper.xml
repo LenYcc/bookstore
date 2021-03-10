@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzydmc.bookstore.model.dao.BookImgMapper">
+  <resultMap id="BaseResultMap" type="com.lzydmc.bookstore.model.pojo.BookImg">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="bid" jdbcType="BIGINT" property="bid" />
+    <result column="mainsrc" jdbcType="VARCHAR" property="mainsrc" />
+    <result column="src1" jdbcType="VARCHAR" property="src1" />
+    <result column="src2" jdbcType="VARCHAR" property="src2" />
+    <result column="src3" jdbcType="VARCHAR" property="src3" />
+    <result column="src4" jdbcType="VARCHAR" property="src4" />
+    <result column="src5" jdbcType="VARCHAR" property="src5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, bid, mainsrc, src1, src2, src3, src4, src5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bookstore_bookimgs
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectByBookKey" resultType="com.lzydmc.bookstore.model.pojo.BookImg">
+      select
+      <include refid="Base_Column_List" />
+      from bookstore_bookimgs
+      where bid = #{bid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from bookstore_bookimgs
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lzydmc.bookstore.model.pojo.BookImg">
+    insert into bookstore_bookimgs (id, bid, mainsrc, 
+      src1, src2, src3, src4, 
+      src5)
+    values (#{id,jdbcType=BIGINT}, #{bid,jdbcType=BIGINT}, #{mainsrc,jdbcType=VARCHAR}, 
+      #{src1,jdbcType=VARCHAR}, #{src2,jdbcType=VARCHAR}, #{src3,jdbcType=VARCHAR}, #{src4,jdbcType=VARCHAR}, 
+      #{src5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzydmc.bookstore.model.pojo.BookImg">
+    insert into bookstore_bookimgs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bid != null">
+        bid,
+      </if>
+      <if test="mainsrc != null">
+        mainsrc,
+      </if>
+      <if test="src1 != null">
+        src1,
+      </if>
+      <if test="src2 != null">
+        src2,
+      </if>
+      <if test="src3 != null">
+        src3,
+      </if>
+      <if test="src4 != null">
+        src4,
+      </if>
+      <if test="src5 != null">
+        src5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="bid != null">
+        #{bid,jdbcType=BIGINT},
+      </if>
+      <if test="mainsrc != null">
+        #{mainsrc,jdbcType=VARCHAR},
+      </if>
+      <if test="src1 != null">
+        #{src1,jdbcType=VARCHAR},
+      </if>
+      <if test="src2 != null">
+        #{src2,jdbcType=VARCHAR},
+      </if>
+      <if test="src3 != null">
+        #{src3,jdbcType=VARCHAR},
+      </if>
+      <if test="src4 != null">
+        #{src4,jdbcType=VARCHAR},
+      </if>
+      <if test="src5 != null">
+        #{src5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzydmc.bookstore.model.pojo.BookImg">
+    update bookstore_bookimgs
+    <set>
+      <if test="bid != null">
+        bid = #{bid,jdbcType=BIGINT},
+      </if>
+      <if test="mainsrc != null">
+        mainsrc = #{mainsrc,jdbcType=VARCHAR},
+      </if>
+      <if test="src1 != null">
+        src1 = #{src1,jdbcType=VARCHAR},
+      </if>
+      <if test="src2 != null">
+        src2 = #{src2,jdbcType=VARCHAR},
+      </if>
+      <if test="src3 != null">
+        src3 = #{src3,jdbcType=VARCHAR},
+      </if>
+      <if test="src4 != null">
+        src4 = #{src4,jdbcType=VARCHAR},
+      </if>
+      <if test="src5 != null">
+        src5 = #{src5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzydmc.bookstore.model.pojo.BookImg">
+    update bookstore_bookimgs
+    set bid = #{bid,jdbcType=BIGINT},
+      mainsrc = #{mainsrc,jdbcType=VARCHAR},
+      src1 = #{src1,jdbcType=VARCHAR},
+      src2 = #{src2,jdbcType=VARCHAR},
+      src3 = #{src3,jdbcType=VARCHAR},
+      src4 = #{src4,jdbcType=VARCHAR},
+      src5 = #{src5,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzydmc.bookstore.model.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.lzydmc.bookstore.model.pojo.Order">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="oid" jdbcType="VARCHAR" property="oid" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="bid" jdbcType="INTEGER" property="bid" />
+    <result column="goodPrice" jdbcType="DECIMAL" property="goodprice" />
+    <result column="creat_date" jdbcType="TIMESTAMP" property="creatDate" />
+    <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, oid, userid, bid, goodPrice, creat_date, end_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bookstore_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from bookstore_order
+  </select>
+  <select id="selectByOid" parameterType="java.lang.String" resultType="com.lzydmc.bookstore.model.pojo.Order">
+    select
+    <include refid="Base_Column_List" />
+    from bookstore_order
+    where oid = #{oid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUserid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from bookstore_order
+    where userid = #{userid,jdbcType=VARCHAR}
+  </select>
+    <select id="selectByUseridrecent"  parameterType="java.lang.String" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from bookstore_order
+      where userid = #{userid,jdbcType=VARCHAR}
+      order by #{creatDate,jdbcType=TIMESTAMP}
+      limit 2
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bookstore_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lzydmc.bookstore.model.pojo.Order">
+    insert into bookstore_order (id, oid, userid, bid
+      goodPrice, creat_date, end_date
+      )
+    values (#{id,jdbcType=INTEGER}, #{oid,jdbcType=VARCHAR}, #{bid,jdbcType=INTEGER},#{userid,jdbcType=VARCHAR},
+      #{goodprice,jdbcType=DECIMAL}, #{creatDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzydmc.bookstore.model.pojo.Order">
+    insert into bookstore_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="oid != null">
+        oid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="bid != null">
+        bid,
+      </if>
+      <if test="goodprice != null">
+        goodPrice,
+      </if>
+      <if test="creatDate != null">
+        creat_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="oid != null">
+        #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="bid != null">
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="goodprice != null">
+        #{goodprice,jdbcType=DECIMAL},
+      </if>
+      <if test="creatDate != null">
+        #{creatDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzydmc.bookstore.model.pojo.Order">
+    update bookstore_order
+    <set>
+      <if test="oid != null">
+        oid = #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="bid != null">
+        bid = #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="goodprice != null">
+        goodPrice = #{goodprice,jdbcType=DECIMAL},
+      </if>
+      <if test="creatDate != null">
+        creat_date = #{creatDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzydmc.bookstore.model.pojo.Order">
+    update bookstore_order
+    set oid = #{oid,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      bid =  #{bid,jdbcType=INTEGER},
+      goodPrice = #{goodprice,jdbcType=DECIMAL},
+      creat_date = #{creatDate,jdbcType=TIMESTAMP},
+      end_date = #{endDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
